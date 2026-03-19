@@ -1,0 +1,41 @@
+---
+version: "2.0"
+
+services:
+  training:
+    image: __YOUR_DOCKERHUB_USERNAME__/mnist-akash-test:latest
+    expose:
+      - port: 3000
+        as: 80
+        to:
+          - global: true
+
+profiles:
+  compute:
+    training:
+      resources:
+        cpu:
+          units: 4
+        memory:
+          size: 8Gi
+        gpu:
+          units: 1
+          attributes:
+            vendor:
+              nvidia:
+                - model: rtx4090
+        storage:
+          - size: 20Gi
+
+  placement:
+    akash:
+      pricing:
+        training:
+          denom: uakt
+          amount: 10000
+
+deployment:
+  training:
+    akash:
+      profile: training
+      count: 1
