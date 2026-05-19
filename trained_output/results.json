@@ -1,0 +1,7 @@
+{
+  "test_accuracy": 98.88,
+  "training_time_seconds": 23.7,
+  "epochs": 2,
+  "device": "cuda",
+  "pytorch_version": "2.5.1+cu124"
+}
